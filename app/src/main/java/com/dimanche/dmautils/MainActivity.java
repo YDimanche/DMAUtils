@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         roundTextView.setText("测试");
         roundTextView.setBackColor(getResources().getColor(R.color.colorAccent));
         roundTextView.setRadius((int) getResources().getDimension(R.dimen.custome));
-//        roundTextView.setBoderWidth((int) getResources().getDimension(R.dimen.custome));
+        roundTextView.setBoderWidth((int) getResources().getDimension(R.dimen.custome));
         roundTextView.setBorderColor(getResources().getColor(R.color.colorPrimaryDark));
 
     }
