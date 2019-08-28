@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RoundTextView">
+    <declare-styleable name="Round">
         <attr name="backColor" format="color" />
         <attr name="radius" format="dimension" />
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
+        <attr name="perfect_circle" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundButton">
+        <attr name="press_effect" format="boolean" /><!--s是否有按下效果-->
+        <attr name="press_color" format="color" /><!--按下的颜色-->
     </declare-styleable>
 
 

@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.ViewGroup;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
@@ -28,6 +29,8 @@ public class RoundTextView extends AppCompatTextView {
     int boderWidth;
     //边框颜色
     int borderColor;
+    //是否正圆
+    boolean perfectCircle = false;
 
 
     public RoundTextView(Context context) {
@@ -94,6 +97,24 @@ public class RoundTextView extends AppCompatTextView {
     }
 
     /**
+     * 设置是否是正圆
+     *
+     * @param perfectCircle
+     */
+    public void setPerfectCircle(boolean perfectCircle) {
+        if (perfectCircle) {
+            if (width > height) {
+                width = height;
+                radius = height / 2;
+            } else {
+                height = width;
+                radius = width / 2;
+            }
+            setShape();
+        }
+    }
+
+    /**
      * 初始化默认的全局属性
      */
     private void init() {
@@ -105,6 +126,13 @@ public class RoundTextView extends AppCompatTextView {
      * 设置圆角等
      */
     private void setShape() {
+        if (perfectCircle) {
+            if (width > height) {
+                radius = height / 2;
+            } else {
+                radius = width / 2;
+            }
+        }
         GradientDrawable gradientDrawable = new GradientDrawable();
         //设置矩形
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
@@ -115,19 +143,20 @@ public class RoundTextView extends AppCompatTextView {
         //设置填充颜色
         gradientDrawable.setColor(backColor);
         setBackground(gradientDrawable);
-
     }
+
+
 
     /**
      * 获取布局中xml定义的属性值
      */
-    @SuppressLint("ResourceType")
     private void getTypeArr(AttributeSet attrs) {
-        TypedArray myTypedArray = mContext.obtainStyledAttributes(attrs, R.styleable.RoundTextView);
-        backColor = myTypedArray.getColor(R.styleable.RoundTextView_backColor, 0x00000000);
-        radius = (int) myTypedArray.getDimension(R.styleable.RoundTextView_radius, 0f);
-        boderWidth = (int) myTypedArray.getDimension(R.styleable.RoundTextView_border_width, 0f);
-        borderColor = myTypedArray.getColor(R.styleable.RoundTextView_border_color, 0x00000000);
+        TypedArray myTypedArray = mContext.obtainStyledAttributes(attrs, R.styleable.Round);
+        backColor = myTypedArray.getColor(R.styleable.Round_backColor, 0x00000000);
+        radius = (int) myTypedArray.getDimension(R.styleable.Round_radius, 0f);
+        boderWidth = (int) myTypedArray.getDimension(R.styleable.Round_border_width, 0f);
+        borderColor = myTypedArray.getColor(R.styleable.Round_border_color, 0x00000000);
+        perfectCircle = myTypedArray.getBoolean(R.styleable.Round_perfect_circle, false);
         myTypedArray.recycle();
         TypedArray androidTypedArray = mContext.obtainStyledAttributes(attrs, new int[]{
                 android.R.attr.layout_width,
