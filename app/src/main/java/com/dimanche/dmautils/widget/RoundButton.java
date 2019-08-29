@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -16,10 +15,6 @@ public class RoundButton extends AppCompatButton {
 
     //背景颜色
     int backColor;
-    //控件高度
-    int height;
-    //控件宽度
-    int width;
     //圆角大小
     int radius;
     //边框宽度
@@ -54,14 +49,66 @@ public class RoundButton extends AppCompatButton {
 
     }
 
-    private void setShape(int mBackColor) {
-        if (perfectCircle) {
-            if (width > height) {
-                radius = height / 2;
-            } else {
-                radius = width / 2;
-            }
+    /***
+     * 设置填充颜色
+     * @param backColor
+     */
+    public void setBackColor(int backColor) {
+        this.backColor = backColor;
+        setShape(backColor);
+
+    }
+
+    /**
+     * 设置圆角
+     *
+     * @param radius
+     */
+    public void setRadius(int radius) {
+        this.radius = radius;
+        setShape(backColor);
+    }
+
+    /**
+     * 设置边框宽度
+     *
+     * @param boderWidth
+     */
+    public void setBoderWidth(int boderWidth) {
+        this.boderWidth = boderWidth;
+        setShape(backColor);
+    }
+
+    /**
+     * 设置边框颜色
+     *
+     * @param borderColor
+     */
+    public void setBorderColor(int borderColor) {
+        this.borderColor = borderColor;
+        setShape(backColor);
+    }
+
+
+    /**
+     * 是否有按下效果
+     *
+     * @param pressEffect 是否有按下效果
+     * @param pressColor  如果为false，该参数传0即可
+     */
+    public void setPressEffect(boolean pressEffect, int pressColor) {
+        this.pressEffect = pressEffect;
+        if (pressEffect) {
+            this.pressColor = pressColor;
+            setShape(pressColor);
+        } else {
+            setShape(backColor);
         }
+
+    }
+
+    private void setShape(int mBackColor) {
+
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setShape(GradientDrawable.RECTANGLE);
         gradientDrawable.setStroke(boderWidth, borderColor);
@@ -107,19 +154,12 @@ public class RoundButton extends AppCompatButton {
         radius = (int) roundTypedArray.getDimension(R.styleable.Round_radius, 0f);
         boderWidth = (int) roundTypedArray.getDimension(R.styleable.Round_border_width, 0f);
         borderColor = roundTypedArray.getColor(R.styleable.Round_border_color, 0x00000000);
-        perfectCircle = roundTypedArray.getBoolean(R.styleable.Round_perfect_circle, false);
         roundTypedArray.recycle();
         TypedArray roundButtonTypedArray = mContext.obtainStyledAttributes(attributeSet, R.styleable.RoundButton);
         pressEffect = roundButtonTypedArray.getBoolean(R.styleable.RoundButton_press_effect, false);
         pressColor = roundButtonTypedArray.getColor(R.styleable.RoundButton_press_color, 0x00000000);
         roundButtonTypedArray.recycle();
-        TypedArray androidTypedArray = mContext.obtainStyledAttributes(attributeSet, new int[]{
-                android.R.attr.layout_width,
-                android.R.attr.layout_height
-        });
-        width = (int) androidTypedArray.getDimension(0, 0f);
-        height = (int) androidTypedArray.getDimension(1, 0f);
-        androidTypedArray.recycle();
+
 
     }
 }

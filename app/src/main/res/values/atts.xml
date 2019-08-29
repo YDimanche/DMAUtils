@@ -5,7 +5,8 @@
         <attr name="radius" format="dimension" />
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
-        <attr name="perfect_circle" format="boolean" />
+        <!--        世上无难事，只要肯放弃-->
+        <!--        <attr name="perfect_circle" format="boolean" />-->
     </declare-styleable>
 
     <declare-styleable name="RoundButton">

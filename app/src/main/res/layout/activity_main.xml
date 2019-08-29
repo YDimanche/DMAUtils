@@ -6,17 +6,5 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.dimanche.dmautils.widget.RoundButton
-        android:id="@+id/round_textview"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:backColor="@color/colorPrimary"
-        app:border_color="@color/colorAccent"
-        app:border_width="3dp"
-        app:radius="10dp"
-        app:perfect_circle="true"
-        app:press_effect="true"
-        app:press_color="@color/colorAccent"
-        android:text="开心" />
 
 </LinearLayout>
